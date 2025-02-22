@@ -1,7 +1,6 @@
 import pickle
 
 from pathlib import Path
-import os
 
 from training_and_test_base import X_credit_training, Y_credit_training, X_credit_test, Y_credit_test
 from training_and_test_base import X_census_training, Y_census_training, X_census_test, Y_census_test
