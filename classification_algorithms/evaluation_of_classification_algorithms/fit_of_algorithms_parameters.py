@@ -28,103 +28,103 @@ if __name__ == '__main__':
     print()
     
 # Tuning (afinação) - Decision Tree
-# parameters = {
-#     'criterion': ['entropy', 'gini'],
-#     'splitter': ['best', 'random'],
-#     'min_samples_split': [2, 5, 10],
-#     'min_samples_leaf': [1, 5, 10],
-# }
+parameters = {
+    'criterion': ['entropy', 'gini'],
+    'splitter': ['best', 'random'],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 5, 10],
+}
 
-# grid_search = GridSearchCV(estimator=DecisionTreeClassifier(), param_grid=parameters)
-# grid_search.fit(X_credit, y_credit)
-# best_parameters = grid_search.best_params_
-# best_result = grid_search.best_score_
+grid_search = GridSearchCV(estimator=DecisionTreeClassifier(), param_grid=parameters)
+grid_search.fit(X_credit, y_credit)
+best_parameters = grid_search.best_params_
+best_result = grid_search.best_score_
 
-# if __name__ == '__main__':
-#     print('Decision Tree:')
-#     print(best_parameters)
-#     print(best_result)
-#     print('-' * 100)
+if __name__ == '__main__':
+    print('Decision Tree:')
+    print(best_parameters)
+    print(best_result)
+    print('-' * 100)
     
     
 # Tuning (afinação) - Random Forest
-# parameters = {
-#     'criterion': ['entropy', 'gini'],
-#     'n_estimators': [10, 40, 100, 150],
-#     'min_samples_split': [2, 5, 10],
-#     'min_samples_leaf': [1, 5, 10],
-# }
+parameters = {
+    'criterion': ['entropy', 'gini'],
+    'n_estimators': [10, 40, 100, 150],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 5, 10],
+}
 
-# grid_search = GridSearchCV(estimator=RandomForestClassifier(), param_grid=parameters)
-# grid_search.fit(X_credit, y_credit)
-# best_parameters = grid_search.best_params_
-# best_result = grid_search.best_score_
+grid_search = GridSearchCV(estimator=RandomForestClassifier(), param_grid=parameters)
+grid_search.fit(X_credit, y_credit)
+best_parameters = grid_search.best_params_
+best_result = grid_search.best_score_
 
-# if __name__ == '__main__':
-#     print('Random Forest:')
-#     print(best_parameters)
-#     print(best_result)
-#     print('-' * 100)  
+if __name__ == '__main__':
+    print('Random Forest:')
+    print(best_parameters)
+    print(best_result)
+    print('-' * 100)  
     
     
 # Tuning (afinação) - kNN (K-Nearest-Neighbors)
-# parameters = {
-#     'n_neighbors': [2, 5, 10, 30, 50],
-#     'weights': ['uniform', 'distance'],
-#     'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],
-#     'leaf_size': [10, 30, 60, 90],
-#     'p': [1, 2],
-#     'metric': ['minkowski'],
-# }
+parameters = {
+    'n_neighbors': [2, 5, 10, 30, 50],
+    'weights': ['uniform', 'distance'],
+    'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],
+    'leaf_size': [10, 30, 60, 90],
+    'p': [1, 2],
+    'metric': ['minkowski'],
+}
 
-# grid_search = GridSearchCV(estimator=KNeighborsClassifier(), param_grid=parameters)
-# grid_search.fit(X_credit, y_credit)
-# best_parameters = grid_search.best_params_
-# best_result = grid_search.best_score_
+grid_search = GridSearchCV(estimator=KNeighborsClassifier(), param_grid=parameters)
+grid_search.fit(X_credit, y_credit)
+best_parameters = grid_search.best_params_
+best_result = grid_search.best_score_
 
-# if __name__ == '__main__':
-#     print('kNN (K-Nearest-Neighbors):')
-#     print(best_parameters)
-#     print(best_result)
-#     print('-' * 100)  
+if __name__ == '__main__':
+    print('kNN (K-Nearest-Neighbors):')
+    print(best_parameters)
+    print(best_result)
+    print('-' * 100)  
     
     
 # Tuning (afinação) - Logistic Regression
-# parameters = {
-#     'tol': [0.0001, 0.00001, 0.000001],
-#     'solver': ['lbfgs', 'sag', 'saga'],
-#     'C': [1, 1.5, 2],
-# }
+parameters = {
+    'tol': [0.0001, 0.00001, 0.000001],
+    'solver': ['lbfgs', 'sag', 'saga'],
+    'C': [1, 1.5, 2],
+}
 
-# grid_search = GridSearchCV(estimator=LogisticRegression(), param_grid=parameters)
-# grid_search.fit(X_credit, y_credit)
-# best_parameters = grid_search.best_params_
-# best_result = grid_search.best_score_
+grid_search = GridSearchCV(estimator=LogisticRegression(), param_grid=parameters)
+grid_search.fit(X_credit, y_credit)
+best_parameters = grid_search.best_params_
+best_result = grid_search.best_score_
 
-# if __name__ == '__main__':
-#     print('Logistic Regression:')
-#     print(best_parameters)
-#     print(best_result)
-#     print('-' * 100)  
+if __name__ == '__main__':
+    print('Logistic Regression:')
+    print(best_parameters)
+    print(best_result)
+    print('-' * 100)  
     
     
 # Tuning (afinação) - SVC (Support Vector Machines)
-# parameters = {
-#     'tol': [0.0001, 0.00001, 0.000001],
-#     'C': [1, 1.5, 2],
-#     'kernel': ['linear', 'poly', 'rbf', 'sigmoid'],
-# }
+parameters = {
+    'tol': [0.0001, 0.00001, 0.000001],
+    'C': [1, 1.5, 2],
+    'kernel': ['linear', 'poly', 'rbf', 'sigmoid'],
+}
 
-# grid_search = GridSearchCV(estimator=SVC(), param_grid=parameters)
-# grid_search.fit(X_credit, y_credit)
-# best_parameters = grid_search.best_params_
-# best_result = grid_search.best_score_
+grid_search = GridSearchCV(estimator=SVC(), param_grid=parameters)
+grid_search.fit(X_credit, y_credit)
+best_parameters = grid_search.best_params_
+best_result = grid_search.best_score_
 
-# if __name__ == '__main__':
-#     print('SVC (Support Vector Machines):')
-#     print(best_parameters)
-#     print(best_result)
-#     print('-' * 100)  
+if __name__ == '__main__':
+    print('SVC (Support Vector Machines):')
+    print(best_parameters)
+    print(best_result)
+    print('-' * 100)  
 
 
 # Tuning (afinação) - Neural Networks
