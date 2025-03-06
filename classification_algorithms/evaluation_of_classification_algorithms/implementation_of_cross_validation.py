@@ -9,6 +9,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier
 
+import pandas as pd
+
 decision_tree_results = []
 random_forest_results = []
 knn_results = []
@@ -74,20 +76,19 @@ for i in range(30):
     
     
 if __name__ == '__main__':
-    print('decision_tree_results:')
-    print(sum(decision_tree_results) / len(decision_tree_results))
+    results = pd.DataFrame(
+        {
+            'Decision Tree': decision_tree_results,
+            'Random Forest': random_forest_results,
+            'KNN': knn_results,
+            'Logistic Regression': logistic_regression_results,
+            'SVM': svm_results,
+            'Neural Network': neural_network_results,
+        }
+    )
     
-    print('random_forest_results:')
-    print(sum(random_forest_results) / len(random_forest_results))
-    
-    print('knn_results:')
-    print(sum(knn_results) / len(knn_results))
-    
-    print('logistic_regression_results:')
-    print(sum(logistic_regression_results) / len(logistic_regression_results))
-    
-    print('svm_results:')
-    print(sum(svm_results) / len(svm_results))
-    
-    print('neural_network_results:')
-    print(sum(neural_network_results) / len(neural_network_results))
+    print(results)
+    print(results.describe())
+    print(f'Variance: {results.var()}')
+    print(f'Standard Deviation: {results.std()}')
+    print(f'Coefficient of variation: {results.std() / results.mean() * 100}%')
