@@ -92,3 +92,24 @@ if __name__ == '__main__':
     print(f'Variance: {results.var()}')
     print(f'Standard Deviation: {results.std()}')
     print(f'Coefficient of variation: {results.std() / results.mean() * 100}%')
+    
+    
+# Saving the results    
+if __name__ == '__main__':
+    from pathlib import Path
+    import pickle
+    
+    algorithm_results_path = Path(__file__).parent.parent.parent / 'algorithm_results.pkl'
+    
+    with open(algorithm_results_path, 'wb') as file_:
+        pickle.dump(
+            [
+                decision_tree_results,
+                random_forest_results,
+                knn_results,
+                logistic_regression_results,
+                svm_results,
+                neural_network_results,
+            ],
+            file_
+        )
