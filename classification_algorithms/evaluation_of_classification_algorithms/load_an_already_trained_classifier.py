@@ -28,20 +28,92 @@ with open(decision_tree_path, 'rb') as file_:
     decision_tree_classifier = pickle.load(file_) 
     
 # Testing the classifiers
-test_index = 0
+test_index = 134
 new_record: np.ndarray = X_credit[test_index]
 new_record = new_record.reshape(1, -1)
 
 print(new_record.shape)
 
-prediction = neural_network_classifier.predict(new_record)
+prediction_neural_network = neural_network_classifier.predict(new_record)[0]
 print('Expected:', y_credit[test_index])
-print('Received:', prediction)
+print('Received:', prediction_neural_network)
 
-prediction = random_forest_classifier.predict(new_record)
+prediction_random_forest = random_forest_classifier.predict(new_record)[0]
 print('Expected:', y_credit[test_index])
-print('Received:', prediction)
+print('Received:', prediction_random_forest)
 
-prediction = decision_tree_classifier.predict(new_record)
+prediction_decision_tree = decision_tree_classifier.predict(new_record)[0]
 print('Expected:', y_credit[test_index])
-print('Received:', prediction)
+print('Received:', prediction_decision_tree)
+
+predictions = [prediction_neural_network, prediction_random_forest, prediction_decision_tree]
+
+# Combination of classifiers
+classifiers_combination = {}
+
+for prediction in predictions:
+    if not classifiers_combination.get(prediction):
+        classifiers_combination[prediction] = 1
+    else:
+        classifiers_combination[prediction] += 1
+        
+votes_number = 1
+most_votes_prediction = prediction_neural_network
+
+for key, value in classifiers_combination.items():
+    if value > votes_number:
+        most_votes_prediction = key
+        votes_number = value
+        
+print('Most Votes Prediction:', most_votes_prediction)
+
+# Rejection of classifiers
+neural_network_probability = neural_network_classifier.predict_proba(new_record)
+neural_network_confidence = neural_network_probability.max()
+
+random_forest_probability = random_forest_classifier.predict_proba(new_record)
+random_forest_confidence = random_forest_probability.max()
+
+decision_tree_probability = decision_tree_classifier.predict_proba(new_record)
+decision_tree_confidence = decision_tree_probability.max()
+
+used_algorithms = 0
+min_confidence = 0.999999
+predictions = []
+
+if neural_network_confidence >= min_confidence:
+    predictions.append(neural_network_classifier.predict(new_record)[0])
+    used_algorithms += 1
+    
+if random_forest_confidence >= min_confidence:
+    predictions.append(random_forest_classifier.predict(new_record)[0])
+    used_algorithms += 1
+    
+if decision_tree_confidence >= min_confidence:
+    predictions.append(decision_tree_classifier.predict(new_record)[0])
+    used_algorithms += 1
+
+
+# Combination of classifiers
+if used_algorithms > 0:
+    classifiers_combination = {}
+
+    for prediction in predictions:
+        if not classifiers_combination.get(prediction):
+            classifiers_combination[prediction] = 1
+        else:
+            classifiers_combination[prediction] += 1
+            
+    votes_number = 1
+    most_votes_prediction = predictions[0]
+
+    for key, value in classifiers_combination.items():
+        if value > votes_number:
+            most_votes_prediction = key
+            votes_number = value
+            
+    print('Rejection of classifiers Prediction:', most_votes_prediction)
+    print('Used algorithms:', used_algorithms)
+    print(neural_network_confidence, random_forest_confidence, decision_tree_confidence)
+else:
+    print('No algorithm has been able to classify')
