@@ -4,7 +4,6 @@ import plotly.express as px
 
 from pathlib import Path
 
-
 health_plan_path = Path(__file__).parent.parent.parent / 'Base_de_dados' / 'plano_saude.csv'
 
 health_plan_base = pd.read_csv(health_plan_path)
