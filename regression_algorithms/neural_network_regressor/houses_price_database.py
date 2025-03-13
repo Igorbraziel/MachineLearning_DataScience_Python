@@ -35,7 +35,9 @@ y_test = y_test_scaler.fit_transform(y_test.reshape(-1, 1)).ravel()
 
 from sklearn.neural_network import MLPRegressor
 
-neural_network_regressor = MLPRegressor()
+hidden_layer_sizes = len(X_training[0])
+
+neural_network_regressor = MLPRegressor(hidden_layer_sizes=(hidden_layer_sizes, hidden_layer_sizes), n_iter_no_change=1000, tol=0.000001, max_iter=2000, random_state=0)
 neural_network_regressor.fit(X_training, y_training)
 
 print('Score (training):', neural_network_regressor.score(X_training, y_training))
