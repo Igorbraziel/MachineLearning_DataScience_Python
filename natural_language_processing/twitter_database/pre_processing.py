@@ -4,6 +4,7 @@ from spacy.lang.pt.stop_words import STOP_WORDS
 import string
 import spacy
 import pickle
+import re
 
 # Load database
 twitter_database_path = Path(__file__).parent.parent.parent / 'Base_de_dados' / 'Twitter' / 'Train50.csv'
@@ -20,6 +21,7 @@ nlp = spacy.load('pt_core_news_sm')
 
 def text_processing(text: str) -> str:
     text = text.lower()
+    text = re.sub(r'@([^\s])+', '', text)
     document = nlp(text)
     text_list = []
     for token in document:
