@@ -13,24 +13,23 @@ dateparse = lambda dates: datetime.strptime(dates, '%Y-%m')
 dataset = pd.read_csv(air_passengers_path, parse_dates=['Month',], index_col='Month', date_format=dateparse)
 
 time_series = dataset['#Passengers']
+time_series.index = pd.to_datetime(time_series.index)
 
-print(time_series)
-print(time_series[1])
-print(time_series['1949-02'])
-print(time_series['1949-02' : '1950-01'])
-
-print(time_series.index.max())
-print(time_series.index.min())
+# Decomposition
+decomposition = seasonal_decompose(time_series)
+trend = decomposition.trend
+seasonal = decomposition.seasonal
+random_resid = decomposition.resid
 
 # Plots
 import matplotlib.pyplot as plt
 
-time_series.index = pd.to_datetime(time_series.index)
-time_series_year = time_series.resample('YE').sum()
-
-plt.plot(time_series_year)
+plt.plot(trend)
 plt.show()
 
-time_series_month = time_series.groupby([lambda x: x.month]).sum()
-plt.plot(time_series_month)
+plt.plot(seasonal)
 plt.show()
+
+plt.plot(random_resid)
+plt.show()
+
